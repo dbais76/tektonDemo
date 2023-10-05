@@ -1,2 +1,2 @@
 # tektonDemo
-Tekton Demo Repo
+This repo consists of Tekton Demos.
