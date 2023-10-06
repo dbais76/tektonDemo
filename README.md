@@ -17,11 +17,14 @@ git-clone
 s2i-php
 openshift-client
 
+You would need to have a storage class and a secret to push the image to the external registry.
+
 
 Feel free to extend the demos and don't forget to share.
 
+The same demo can be extended to deploy the application in different environment (Project) by adding required privileges to pipeline service accout or by creating a new service account and running the pipeline with it.
 
+#oc policy add-role-to-user admin  system:serviceaccount:demo:pipeline -n prod
 
-
-oc policy add-role-to-user admin  system:serviceaccount:demo:pipeline -n prod
-oc secrets link pipeline demo-sec
+The service account should also have bind to the secret containing authentication information to the registry.
+#oc secrets link pipeline demo-sec
