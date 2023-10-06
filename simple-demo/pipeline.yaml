@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: workspace-pipeline-ref
+spec:
+  tasks:
+  - name: welcome
+    taskRef:
+      name: welcome
+  - name: display-content
+    taskRef:
+        name: display-content
+    workspaces:
+        - name: local-store
+          workspace: pipeline-ws
+    runAfter:
+        - fetch-content      
+  - name: fetch-content
+    taskRef:
+      name: fetch-content
+    workspaces:
+      - name: local-store
+        workspace: pipeline-ws
+  workspaces:
+    - name: pipeline-ws
+        

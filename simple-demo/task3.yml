@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: display-content
+spec:
+  steps:
+    - name: step-show-content
+      image: registry.access.redhat.com/ubi8/ubi-micro
+      command: ["/bin/sh"]
+      args:
+        - -c
+        - |
+            echo "Display release version captured in previous task"
+            cat $(workspaces.local-store.path)/release-ver.txt
+            echo "Hope the demo was good !!"
+  workspaces:
+    - name: local-store
+          

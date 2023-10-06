@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  name: pipeline-run
+spec:
+  workspaces:
+    - name: pipeline-ws
+      volumeClaimTemplate:
+        metadata:
+          name: pipeline-pvc
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+  pipelineRef:
+    name: demo-pipeline
+  params:
+  - name: username
+    value: "Daleep Singh Bais"    

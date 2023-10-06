@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: fetch-content
+spec:
+  steps:
+    - name: step-get-content
+      image: registry.access.redhat.com/ubi8/ubi-micro
+      command: ["/bin/sh"]
+      args:
+        - -c
+        - |
+            cat /etc/redhat-release > $(workspaces.local-store.path)/release-ver.txt
+            ls -la $(workspaces.local-store.path)
+            echo "File created in local workspace"
+  workspaces:
+    - name: local-store
+          
