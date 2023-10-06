@@ -62,13 +62,7 @@ spec:
       params:
         - name: SCRIPT
           value: >-
-            oc new-app --name demo --image quay.io/dbais76/demo-repo:120 -l app=demo 
-            echo "Exposing service to get Route "
-            oc expose svc demo
-            ROUTE_URL=$( oc get route demo -o template --template '{{ "http://" }}{{ .spec.host }}')
-            echo "***********************************************"
-            echo "The Application is now accessible on $ROUTE_URL"
-            echo "***********************************************"
+            oc new-app --name demo --image quay.io/dbais76/demo-repo:120 -l app=demo; sleep 30 ; echo "Exposing service to get Route " ; oc expose svc demo ; ROUTE_URL=$( oc get route demo -o template --template '{{ "http://" }}{{ .spec.host }}') ; echo "The Application is now accessible on $ROUTE_URL"
         - name: VERSION
           value: latest
       runAfter:
