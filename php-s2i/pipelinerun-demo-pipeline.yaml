@@ -1,0 +1,25 @@
+﻿apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: s2i-demo-pipeline-
+  labels:
+    tekton.dev/pipeline: s2i-demo-pipeline
+spec:
+  pipelineRef:
+    name: s2i-demo-pipeline
+  serviceAccountName: pipeline
+  timeout: 1h0m0s
+  workspaces:
+    - name: demowk
+      volumeClaimTemplate:
+        metadata:
+          creationTimestamp: null
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+          storageClassName: nfs-storage
+          volumeMode: Filesystem
+
