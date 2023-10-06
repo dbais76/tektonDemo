@@ -1,12 +1,15 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: workspace-pipeline-ref
+  name: demo-pipeline
 spec:
   tasks:
   - name: welcome
     taskRef:
       name: welcome
+    params:
+      - name: username
+        value: $(params.username)    
   - name: display-content
     taskRef:
         name: display-content
@@ -21,6 +24,8 @@ spec:
     workspaces:
       - name: local-store
         workspace: pipeline-ws
+    runAfter:
+        - welcome      
   workspaces:
     - name: pipeline-ws
         
