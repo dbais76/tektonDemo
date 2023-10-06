@@ -19,3 +19,9 @@ openshift-client
 
 
 Feel free to extend the demos and don't forget to share.
+
+
+
+
+oc policy add-role-to-user admin  system:serviceaccount:demo:pipeline -n prod
+oc secrets link pipeline demo-sec
