@@ -3,6 +3,9 @@ kind: Pipeline
 metadata:
   name: demo-pipeline
 spec:
+  params:
+  - name: username
+    type: string
   tasks:
   - name: welcome
     taskRef:
