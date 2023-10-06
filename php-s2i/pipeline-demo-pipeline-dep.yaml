@@ -1,7 +1,7 @@
 ﻿apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: demo-pipelineine
+  name: s2i-demo-pipeline
 spec:
   tasks:
     - name: git-clone
@@ -62,7 +62,7 @@ spec:
       params:
         - name: SCRIPT
           value: >-
-            oc new-app --name demo --image quay.io/dbais76/demo-repo:120 -l app=demo; sleep 30 ; echo "Exposing service to get Route " ; oc expose svc demo ; ROUTE_URL=$( oc get route demo -o template --template '{{ "http://" }}{{ .spec.host }}') ; echo "The Application is now accessible on $ROUTE_URL"
+            oc new-app --name demo --image quay.io/dbais76/demo-repo:120 -l app=demo -n prod; sleep 30 ; echo "Exposing service to get Route in project Prod " ; oc expose svc demo -n prod ; ROUTE_URL=$( oc get route demo -n prod -o template --template '{{ "http://" }}{{ .spec.host }}') ; echo "The Application is now accessible on $ROUTE_URL"
         - name: VERSION
           value: latest
       runAfter:
