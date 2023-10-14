@@ -1,7 +1,7 @@
 #!/bin/bash
 oc get tasks
 echo "Deleting tasks "
-oc delete tasks
+oc delete tasks --all
 oc get taskruns 
 echo "Deleting taskruns "
 oc delete taskruns --all
